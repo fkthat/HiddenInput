@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using FkThat.Console;
+﻿using FkThat.Console;
 
 namespace FkThat.SecretInput;
 
 /// <inheritdoc/>
-public class SecretConsoleReader : ISecretConsoleReader
+public sealed class SecretConsoleReader : ISecretConsoleReader
 {
     private readonly IConsoleText _consoleText;
     private readonly IConsoleKeyboard _consoleKeyboard;
@@ -26,9 +24,53 @@ public class SecretConsoleReader : ISecretConsoleReader
     }
 
     /// <inheritdoc/>
-    [ExcludeFromCodeCoverage]
     public string ReadLine(char maskChar = '*')
     {
-        throw new NotImplementedException();
+        Stack<char> buffer = new();
+
+        while (true)
+        {
+            var keyInfo = _consoleKeyboard.ReadKey(true);
+
+            if (keyInfo.KeyChar != '\0')
+            {
+                WriteMaskChar(maskChar);
+                buffer.Push(keyInfo.KeyChar);
+            }
+            else if (keyInfo.Key == ConsoleKey.Backspace)
+            {
+                if (buffer.Count > 0)
+                {
+                    WriteBackspace(maskChar);
+                    buffer.Pop();
+                }
+            }
+            else if (keyInfo.Key == ConsoleKey.Enter)
+            {
+                WriteEnter();
+                return new string(buffer.Reverse().ToArray());
+            }
+        }
+    }
+
+    private void WriteMaskChar(char maskChar)
+    {
+        if (maskChar != '\0')
+        {
+            _consoleText.Out.Write(maskChar);
+        }
+    }
+
+    private void WriteBackspace(char maskChar)
+    {
+        if (maskChar != '\0')
+        {
+            _consoleText.Out.Write("\b \b");
+        }
+    }
+
+    private void WriteEnter()
+    {
+        _consoleText.Out.WriteLine();
     }
 }
