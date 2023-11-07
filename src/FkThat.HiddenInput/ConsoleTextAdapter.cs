@@ -1,6 +1,6 @@
-﻿using FkThat.Console;
+using FkThat.Console;
 
-namespace FkThat.SecretInput
+namespace FkThat.HiddenInput
 {
     internal sealed class ConsoleTextAdapter : IKeyboardCommandHandler
     {

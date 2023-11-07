@@ -1,3 +1,3 @@
-﻿namespace FkThat.SecretInput;
+namespace FkThat.HiddenInput;
 
 internal sealed record EnterKeyboardCommand() : KeyboardCommand;

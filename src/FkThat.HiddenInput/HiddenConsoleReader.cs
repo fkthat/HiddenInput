@@ -1,15 +1,15 @@
-﻿using FkThat.Console;
+using FkThat.Console;
 
-namespace FkThat.SecretInput;
+namespace FkThat.HiddenInput;
 
 /// <inheritdoc/>
-public sealed class SecretConsoleReader : ISecretConsoleReader
+public sealed class HiddenConsoleReader : IHiddenConsoleReader
 {
     private readonly IConsoleText _consoleText;
     private readonly IConsoleKeyboard _consoleKeyboard;
 
     /// <summary>
-    /// Initialize a new instance of the <see cref="SecretConsoleReader"/> class.
+    /// Initialize a new instance of the <see cref="HiddenConsoleReader"/> class.
     /// </summary>
     /// <param name="consoleText">Console text I/O abstraction.</param>
     /// <param name="consoleKeyboard">Console keyboard abstraction.</param>
@@ -17,7 +17,7 @@ public sealed class SecretConsoleReader : ISecretConsoleReader
     /// The <paramref name="consoleText"/> or <paramref name="consoleKeyboard"/> is <see
     /// langword="null"/>.
     /// </exception>
-    public SecretConsoleReader(IConsoleText consoleText, IConsoleKeyboard consoleKeyboard)
+    public HiddenConsoleReader(IConsoleText consoleText, IConsoleKeyboard consoleKeyboard)
     {
         _consoleText = consoleText ?? throw new ArgumentNullException(nameof(consoleText));
         _consoleKeyboard = consoleKeyboard ?? throw new ArgumentNullException(nameof(consoleKeyboard));

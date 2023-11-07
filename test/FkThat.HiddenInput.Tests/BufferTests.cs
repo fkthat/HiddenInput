@@ -1,4 +1,4 @@
-﻿namespace FkThat.SecretInput.Tests;
+namespace FkThat.HiddenInput.Tests;
 
 public class BufferTests
 {

@@ -1,6 +1,6 @@
-﻿using FkThat.Console;
+using FkThat.Console;
 
-namespace FkThat.SecretInput.Tests;
+namespace FkThat.HiddenInput.Tests;
 
 public class ConsoleKeyboardAdapterTests
 {

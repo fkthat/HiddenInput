@@ -1,8 +1,8 @@
-﻿using FkThat.Console;
+using FkThat.Console;
 
-namespace FkThat.SecretInput.Tests;
+namespace FkThat.HiddenInput.Tests;
 
-public class SecretConsoleReaderTests
+public class HiddenConsoleReaderTests
 {
     [Fact]
     public void Ctor_should_check_null_consoleText()
@@ -10,7 +10,7 @@ public class SecretConsoleReaderTests
         IConsoleText consoleText = null!;
         IConsoleKeyboard consoleKeyboard = A.Fake<IConsoleKeyboard>();
 
-        FluentActions.Invoking(() => new SecretConsoleReader(consoleText, consoleKeyboard))
+        FluentActions.Invoking(() => new HiddenConsoleReader(consoleText, consoleKeyboard))
             .Should().Throw<ArgumentNullException>().WithParameterName(nameof(consoleText));
     }
 
@@ -20,7 +20,7 @@ public class SecretConsoleReaderTests
         IConsoleText consoleText = A.Fake<IConsoleText>();
         IConsoleKeyboard consoleKeyboard = null!;
 
-        FluentActions.Invoking(() => new SecretConsoleReader(consoleText, consoleKeyboard))
+        FluentActions.Invoking(() => new HiddenConsoleReader(consoleText, consoleKeyboard))
             .Should().Throw<ArgumentNullException>().WithParameterName(nameof(consoleKeyboard));
     }
 
@@ -30,7 +30,7 @@ public class SecretConsoleReaderTests
         IConsoleText consoleText = A.Fake<IConsoleText>();
         IConsoleKeyboard consoleKeyboard = A.Fake<IConsoleKeyboard>();
 
-        FluentActions.Invoking(() => new SecretConsoleReader(consoleText, consoleKeyboard))
+        FluentActions.Invoking(() => new HiddenConsoleReader(consoleText, consoleKeyboard))
             .Should().NotThrow();
     }
 
@@ -69,7 +69,7 @@ public class SecretConsoleReaderTests
         var consoleText = A.Fake<IConsoleText>();
         A.CallTo(() => consoleText.Out).Returns(stringWriter);
 
-        SecretConsoleReader sut = new(consoleText, consoleKeyboard);
+        HiddenConsoleReader sut = new(consoleText, consoleKeyboard);
         var actual = sut.ReadLine(maskChar);
 
         actual.Should().Be("P@ssw0rd");

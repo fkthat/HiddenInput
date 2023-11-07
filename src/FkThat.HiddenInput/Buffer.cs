@@ -1,4 +1,4 @@
-﻿namespace FkThat.SecretInput;
+namespace FkThat.HiddenInput;
 
 internal sealed class Buffer : IBuffer, IKeyboardCommandHandler
 {

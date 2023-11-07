@@ -1,4 +1,4 @@
-﻿namespace FkThat.SecretInput;
+namespace FkThat.HiddenInput;
 
 internal interface IKeyboardCommandHandler
 {
