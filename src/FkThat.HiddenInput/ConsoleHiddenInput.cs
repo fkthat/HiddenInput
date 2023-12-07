@@ -3,38 +3,53 @@ using FkThat.Console;
 namespace FkThat.HiddenInput;
 
 /// <inheritdoc/>
-public sealed class ConsoleHiddenInput : IHiddenInput
+public sealed class ConsoleHiddenInput : IConsoleHiddenInput
 {
-    private readonly IConsoleKeyboard _consoleKeyboard;
-    private readonly IConsoleText _consoleText;
+    private readonly IKeyboardAdapter _keyboard;
+    private readonly IStateMachineFactory _factory;
 
     /// <summary>
     /// Initialize a new instance of the <see cref="ConsoleHiddenInput"/> class.
     /// </summary>
-    /// <param name="consoleKeyboard">Console keyboard abstraction.</param>
-    /// <param name="consoleText">Console text I/O abstraction.</param>
-    /// <param name="maskChar">
+    /// <param name="keyboard">Console keyboard abstraction.</param>
+    /// <param name="console">Console text I/O abstraction.</param>
+    /// <param name="mask">
     /// The char to mask the input. The null ('\0') char means the UNIX-like input.
     /// </param>
     /// <exception cref="ArgumentNullException">
-    /// The <paramref name="consoleText"/> or <paramref name="consoleKeyboard"/> is <see
+    /// The <paramref name="console"/> or <paramref name="keyboard"/> is <see
     /// langword="null"/>.
     /// </exception>
-    public ConsoleHiddenInput(
-        IConsoleKeyboard consoleKeyboard,
-        IConsoleText consoleText,
-        char maskChar = '*')
+    public ConsoleHiddenInput(IConsoleKeyboard keyboard, IConsoleText console, char mask = '*')
     {
-        _consoleKeyboard = consoleKeyboard ??
-            throw new ArgumentNullException(nameof(consoleKeyboard));
+        ArgumentNullException.ThrowIfNull(keyboard, nameof(keyboard));
+        ArgumentNullException.ThrowIfNull(console, nameof(console));
 
-        _consoleText = consoleText ??
-            throw new ArgumentNullException(nameof(consoleText));
+        _keyboard = new KeyboardAdapter(keyboard);
+
+        IConsoleAdapter con = (mask != '\0')
+            ? new CharMaskConsoleAdapter(console, mask)
+            : new ZeroMaskConsoleAdapter(console);
+
+        _factory = new StateMachineFactory(con);
+    }
+
+    internal ConsoleHiddenInput(IKeyboardAdapter keyboard, IStateMachineFactory factory)
+    {
+        _keyboard = keyboard;
+        _factory = factory;
     }
 
     /// <inheritdoc/>
     public string ReadLine()
     {
-        throw new NotImplementedException();
+        var machine = _factory.CreateStateMachine();
+
+        while (!machine.IsFinished)
+        {
+            machine.ExecuteCommand(_keyboard.ReadCommand());
+        }
+
+        return machine.Data;
     }
 }
