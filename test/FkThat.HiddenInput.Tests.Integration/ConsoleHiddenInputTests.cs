@@ -39,8 +39,8 @@ public class ConsoleHiddenInputTests
         var consoleText = A.Fake<IConsoleText>();
         A.CallTo(() => consoleText.Error).Returns(stringWriter);
 
-        ConsoleHiddenInput sut = new(consoleKeyboard, consoleText, maskChar);
-        var actual = sut.ReadLine();
+        ConsoleHiddenInput sut = new(consoleKeyboard, consoleText);
+        var actual = sut.ReadLine(maskChar);
 
         actual.Should().Be("P@ssw0rd");
         stringWriter.ToString().Should().Be(expectedOutput + Environment.NewLine);

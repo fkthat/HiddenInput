@@ -1,9 +1,16 @@
-﻿namespace FkThat.HiddenInput;
+﻿using FkThat.Console;
 
-internal sealed class StateMachineFactory(IConsoleAdapter console)
+namespace FkThat.HiddenInput;
+
+internal sealed class StateMachineFactory(IConsoleText console)
     : IStateMachineFactory
 {
-    private readonly IConsoleAdapter _console = console;
+    private readonly IConsoleText _console = console;
 
-    public IStateMachine CreateStateMachine() => new StateMachine(_console);
+    public IStateMachine CreateStateMachine(char mask)
+    {
+        return new StateMachine((mask != '\0')
+            ? new CharMaskConsoleAdapter(_console, mask)
+            : new ZeroMaskConsoleAdapter(_console));
+    }
 }

@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FkThat.HiddenInput.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FkThat.HiddenInput.Tests.Integration", "test\FkThat.HiddenInput.Tests.Integration\FkThat.HiddenInput.Tests.Integration.csproj", "{A87851A7-AB28-43A1-970D-D494C6B9B1F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9C0205ED-21BD-472F-8654-00F46892779A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FkThat.HiddenInput.Samples", "samples\FkThat.HiddenInput.Samples\FkThat.HiddenInput.Samples.csproj", "{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,10 +66,23 @@ Global
 		{A87851A7-AB28-43A1-970D-D494C6B9B1F5}.Release|x64.Build.0 = Release|Any CPU
 		{A87851A7-AB28-43A1-970D-D494C6B9B1F5}.Release|x86.ActiveCfg = Release|Any CPU
 		{A87851A7-AB28-43A1-970D-D494C6B9B1F5}.Release|x86.Build.0 = Release|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Debug|x64.Build.0 = Debug|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Release|x64.Build.0 = Release|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F70B54C2-9FDA-4DE1-B1E3-0B9C75D425B9} = {A1B4A773-67AB-4810-9E37-3D8EA8420E72}
 		{192C4768-F54B-4D9F-B1BD-7669D33EFCC0} = {F345C42D-B8DC-4144-880D-3721B5E83417}
 		{A87851A7-AB28-43A1-970D-D494C6B9B1F5} = {F345C42D-B8DC-4144-880D-3721B5E83417}
+		{B718BD92-9316-4A78-AAF4-C378ED7B2AF1} = {9C0205ED-21BD-472F-8654-00F46892779A}
 	EndGlobalSection
 EndGlobal

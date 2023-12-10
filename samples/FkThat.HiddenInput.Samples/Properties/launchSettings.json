@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FkThat.HiddenInput.Samples": {
+      "commandName": "Project",
+      "commandLineArgs": "foobar"
+    }
+  }
+}

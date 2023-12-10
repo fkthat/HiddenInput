@@ -2,5 +2,5 @@
 
 internal interface IStateMachineFactory
 {
-    IStateMachine CreateStateMachine();
+    IStateMachine CreateStateMachine(char mask);
 }

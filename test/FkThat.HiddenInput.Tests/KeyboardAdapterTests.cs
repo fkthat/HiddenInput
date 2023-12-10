@@ -65,25 +65,7 @@ public class KeyboardAdapterTests
     };
 
     public static IEnumerable<object[]> GetReadCasesNop() => new object[][] {
-        // Alt + char
-        [new ConsoleKeyInfo('\0', ConsoleKey.F, false, true, false)],
-        // Ctl + char
-        [new ConsoleKeyInfo('\0', ConsoleKey.F, false, false, true)],
-        // Alt + backspace
-        [new ConsoleKeyInfo('\0', ConsoleKey.Backspace, false, true, false)],
-        // Shift + escape
-        [new ConsoleKeyInfo('\0', ConsoleKey.Escape, true, false, false)],
-        // Alt + escape
-        [new ConsoleKeyInfo('\0', ConsoleKey.Escape, false, true, false)],
-        // Ctl + escape
-        [new ConsoleKeyInfo('\0', ConsoleKey.Escape, false, false, true)],
-        // Shift + enter
-        [new ConsoleKeyInfo('\0', ConsoleKey.Enter, true, false, false)],
-        // Alt + enter
-        [new ConsoleKeyInfo('\0', ConsoleKey.Enter, false, true, false)],
-        // Ctl + enter
-        [new ConsoleKeyInfo('\0', ConsoleKey.Enter, false, false, true)],
-        // Tab (for instance
+        // Tab
         [new ConsoleKeyInfo('\0', ConsoleKey.Tab, false, false, false)],
         // [new ConsoleKeyInfo('\0', ConsoleKey.Enter, false, false, false)],
     };

@@ -10,16 +10,13 @@ public class ConsoleHiddenInputTests
         var keyboard = A.Fake<IConsoleKeyboard>();
         var console = A.Fake<IConsoleText>();
 
-        FluentActions.Invoking(() => new ConsoleHiddenInput(null!, console, '*'))
+        FluentActions.Invoking(() => new ConsoleHiddenInput(null!, console))
             .Should().Throw<ArgumentNullException>().WithParameterName(nameof(keyboard));
 
-        FluentActions.Invoking(() => new ConsoleHiddenInput(keyboard, null!, '*'))
+        FluentActions.Invoking(() => new ConsoleHiddenInput(keyboard, null!))
             .Should().Throw<ArgumentNullException>().WithParameterName(nameof(console));
 
-        FluentActions.Invoking(() => new ConsoleHiddenInput(keyboard, console, '*'))
-            .Should().NotThrow();
-
-        FluentActions.Invoking(() => new ConsoleHiddenInput(keyboard, console, '\0'))
+        FluentActions.Invoking(() => new ConsoleHiddenInput(keyboard, console))
             .Should().NotThrow();
     }
 
@@ -29,7 +26,7 @@ public class ConsoleHiddenInputTests
         var keyboard = A.Fake<IKeyboardAdapter>();
         var factory = A.Fake<IStateMachineFactory>();
         var machine = A.Fake<IStateMachine>();
-        A.CallTo(() => factory.CreateStateMachine()).Returns(machine);
+        A.CallTo(() => factory.CreateStateMachine('*')).Returns(machine);
 
         var commands = new KeyboardCommand[] {
             new CharKeyboardCommand('f'),
@@ -70,7 +67,7 @@ public class ConsoleHiddenInputTests
         A.CallTo(() => machine.Data).ReturnsLazily(() => foo);
 
         ConsoleHiddenInput sut = new(keyboard, factory);
-        var result = sut.ReadLine();
+        var result = sut.ReadLine('*');
 
         result.Should().Be("foo");
     }

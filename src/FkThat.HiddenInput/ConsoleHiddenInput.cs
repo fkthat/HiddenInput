@@ -13,25 +13,16 @@ public sealed class ConsoleHiddenInput : IConsoleHiddenInput
     /// </summary>
     /// <param name="keyboard">Console keyboard abstraction.</param>
     /// <param name="console">Console text I/O abstraction.</param>
-    /// <param name="mask">
-    /// The char to mask the input. The null ('\0') char means the UNIX-like input.
-    /// </param>
     /// <exception cref="ArgumentNullException">
     /// The <paramref name="console"/> or <paramref name="keyboard"/> is <see
     /// langword="null"/>.
     /// </exception>
-    public ConsoleHiddenInput(IConsoleKeyboard keyboard, IConsoleText console, char mask = '*')
+    public ConsoleHiddenInput(IConsoleKeyboard keyboard, IConsoleText console)
     {
         ArgumentNullException.ThrowIfNull(keyboard, nameof(keyboard));
         ArgumentNullException.ThrowIfNull(console, nameof(console));
-
         _keyboard = new KeyboardAdapter(keyboard);
-
-        IConsoleAdapter con = (mask != '\0')
-            ? new CharMaskConsoleAdapter(console, mask)
-            : new ZeroMaskConsoleAdapter(console);
-
-        _factory = new StateMachineFactory(con);
+        _factory = new StateMachineFactory(console);
     }
 
     internal ConsoleHiddenInput(IKeyboardAdapter keyboard, IStateMachineFactory factory)
@@ -41,9 +32,9 @@ public sealed class ConsoleHiddenInput : IConsoleHiddenInput
     }
 
     /// <inheritdoc/>
-    public string ReadLine()
+    public string ReadLine(char mask)
     {
-        var machine = _factory.CreateStateMachine();
+        var machine = _factory.CreateStateMachine(mask);
 
         while (!machine.IsFinished)
         {
