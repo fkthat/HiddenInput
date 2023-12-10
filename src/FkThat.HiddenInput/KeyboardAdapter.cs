@@ -22,43 +22,31 @@ internal sealed class KeyboardAdapter : IKeyboardAdapter
         var ctl = ki.Modifiers.HasFlag(ConsoleModifiers.Control);
 
         // char
-        if (keyChar != '\0' && !shift && !alt && !ctl)
+        if (keyChar != '\0' && !char.IsControl(keyChar))
         {
             return new CharKeyboardCommand(keyChar);
         }
 
-        // Shift + char
-        if (keyChar != '\0' && shift && !alt && !ctl)
-        {
-            return new CharKeyboardCommand(keyChar);
-        }
-
-        // backspace
-        if (key == ConsoleKey.Backspace && !shift && !alt && !ctl)
-        {
-            return new BackspaceKeyboardCommand();
-        }
-
-        // Shift + backspace
-        if (key == ConsoleKey.Backspace && shift && !alt && !ctl)
+        // backspace or Shift + backspace
+        if (key == ConsoleKey.Backspace && !ctl)
         {
             return new BackspaceKeyboardCommand();
         }
 
         // Ctl + backspace
-        if (key == ConsoleKey.Backspace && !shift && !alt && ctl)
+        if (key == ConsoleKey.Backspace && ctl)
         {
             return new EraseKeyboardCommand();
         }
 
         // Escape
-        if (key == ConsoleKey.Escape && !shift && !alt && !ctl)
+        if (key == ConsoleKey.Escape)
         {
             return new EraseKeyboardCommand();
         }
 
         // enter
-        if (key == ConsoleKey.Enter && !shift && !alt && !ctl)
+        if (key == ConsoleKey.Enter)
         {
             return new NewLineKeyboardCommand();
         }
